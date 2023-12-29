@@ -34,7 +34,7 @@ def log_book(username: str, label: str, value: str, ref: str, toast: str):
                 }})
             st.toast(toast)
             time.sleep(2)
-            add_contribution(username = username, value: int = 1)
+            add_contribution(username = username, value = 1)
            # st.rerun()
     if value:
         if len(value) > 1:
