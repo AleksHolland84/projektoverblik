@@ -34,7 +34,7 @@ def log_book(label: str, value: str, ref: str, toast: str):
                 }})
             st.toast(toast)
             time.sleep(2)
-           # st.rerun()
+            st.rerun()
     if value:
         if len(value) > 1:
             with col2:
