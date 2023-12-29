@@ -19,7 +19,7 @@ def text_area(username: str, label: str, value: str, ref: str, toast: str):
 # --- Function displau st.text_area. If db contains text, the text_area's
 # --- label will contain the db content. Also, it db contains text,
 # --- the date for uploading text is displayed ---
-def log_book(username: str, label: str, value: str, ref: str, toast: str):
+def log_book(label: str, value: str, ref: str, toast: str):
     if value != None:
         _input = st.text_area(label = label, value=value[0])
     else:
@@ -34,7 +34,6 @@ def log_book(username: str, label: str, value: str, ref: str, toast: str):
                 }})
             st.toast(toast)
             time.sleep(2)
-            add_contribution(username = username, value = 1)
            # st.rerun()
     if value:
         if len(value) > 1:
