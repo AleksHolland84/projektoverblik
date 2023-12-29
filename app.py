@@ -17,6 +17,7 @@ import streamlit_authenticator as stauth # pip install streamlit-authenticator
 
 #-- GLOBAL VARIABLES ---
 current_date = date.today().strftime("%Y-%m-%d")
+version = "1.0"
 
 # -- DB AUTHENTICATION
 db_creds = dict(st.secrets['firebase']['db_access'])
@@ -25,8 +26,11 @@ def load_db():
     cred = credentials.Certificate(db_creds)
     return firebase_admin.initialize_app(cred, {"databaseURL":st.secrets['firebase']['url']})
 
-app = load_db()
 
+# Setup config - to configure title of webpage
+st.set_page_config(page_title='Projekt overblik', page_icon="🧪",)
+st.caption(f"version {version}")
+app = load_db()
 
 # --- USER AUTHENTICATION ---
 # Load the authenticator from the load_user_auth function in the auth_module.py
