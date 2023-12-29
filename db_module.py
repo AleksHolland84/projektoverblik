@@ -13,7 +13,7 @@ def text_area(username: str, label: str, value: str, ref: str, toast: str):
         st.toast(toast)
         add_contribution(username=username, value=1) # add contribution to graph
         time.sleep(2)
-        st.rerun()
+        #st.rerun()
         return True
 
 # --- Function displau st.text_area. If db contains text, the text_area's
