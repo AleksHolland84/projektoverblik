@@ -23,7 +23,7 @@ db_creds = dict(st.secrets['firebase']['db_access'])
 @st.cache_resource # cache the initializing of the db
 def load_db():
     cred = credentials.Certificate(db_creds)
-    return firebase_admin.initialize_app(cred, {"databaseURL":st.secrets['forebase']['url']})
+    return firebase_admin.initialize_app(cred, {"databaseURL":st.secrets['firebase']['url']})
 
 app = load_db()
 
