@@ -197,7 +197,7 @@ if authentication_status and username != "admin":
     for day in week_day_list:
         st.subheader(day.capitalize())
         logbog = logbook.get('logbog')
-        date = log_book(label=f"Logbog for {day}", value=logbog.get(f'logbog for {day}'), ref=f"/content_container/usernames/{username}/logbog", toast=f"Logbog for {day} uploaded!")
+        date = log_book(username=usernamelabel=f"Logbog for {day}", value=logbog.get(f'logbog for {day}'), ref=f"/content_container/usernames/{username}/logbog", toast=f"Logbog for {day} uploaded!")
         if date:
             pass
             #print(date)
