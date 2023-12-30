@@ -158,11 +158,14 @@ if authentication_status and username != "admin":
 
 
     st.header("Uge 3", divider = "grey")
-    text_area(username=username, label="Gruppekontrakt", value=user_content.get('gruppekontrakt'), ref=f"/content_container/usernames/{username}/content", toast="Gruppekontrakt uploaded!")
+    if text_area(username=username, label="Gruppekontrakt", value=user_content.get('gruppekontrakt'), ref=f"/content_container/usernames/{username}/content", toast="Gruppekontrakt uploaded!"):
+        add_contribution(username=username, value=1, date = datetime.now().strftime("%Y-%m-%d")) # add contribution to graph
 
-    text_area(username=username, label="Undersøgelsesspørgsmål", value=user_content.get('undersøgelsesspørgsmål'), ref=f"/content_container/usernames/{username}/content", toast="Undersøgelsesspørgsmål uploaded!")
+    if text_area(username=username, label="Undersøgelsesspørgsmål", value=user_content.get('undersøgelsesspørgsmål'), ref=f"/content_container/usernames/{username}/content", toast="Undersøgelsesspørgsmål uploaded!"):
+        add_contribution(username=username, value=1, date = datetime.now().strftime("%Y-%m-%d")) # add contribution to graph
 
-    text_area(username=username, label="Problemformulering", value=user_content.get('problemformulering'), ref=f"/content_container/usernames/{username}/content", toast="Problemformulering uploaded!")
+    if text_area(username=username, label="Problemformulering", value=user_content.get('problemformulering'), ref=f"/content_container/usernames/{username}/content", toast="Problemformulering uploaded!"):
+        add_contribution(username=username, value=1, date = datetime.now().strftime("%Y-%m-%d")) # add contribution to graph
 
 
     # --- SET VEJLEDNINGSTID ---
@@ -199,6 +202,7 @@ if authentication_status and username != "admin":
         logbog = logbook.get('logbog')
         date = log_book(username = username, label=f"Logbog for {day}", value=logbog.get(f'logbog for {day}'), ref=f"/content_container/usernames/{username}/logbog", toast=f"Logbog for {day} uploaded!")
         if date:
+            add_contribution(username=username, value=1, date = datetime.now().strftime("%Y-%m-%d")) # add contribution to graph
             pass
             #print(date)
 
