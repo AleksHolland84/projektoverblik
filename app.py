@@ -202,7 +202,6 @@ if authentication_status and username != "admin":
         logbog = logbook.get('logbog')
         date = log_book(username = username, label=f"Logbog for {day}", value=logbog.get(f'logbog for {day}'), ref=f"/content_container/usernames/{username}/logbog", toast=f"Logbog for {day} uploaded!")
         if date:
-            add_contribution(username=username, value=1, date = datetime.now().strftime("%Y-%m-%d")) # add contribution to graph
             pass
             #print(date)
 
