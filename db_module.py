@@ -32,6 +32,7 @@ def log_book(username: str, label: str, value: str, ref: str, toast: str):
                 }})
             add_contribution(username=username, value=1, date = datetime.now().strftime("%Y-%m-%d")) # add contribution to graph
             st.toast(toast)
+            st.rerun()
             time.sleep(2)
     if value:
         if len(value) > 1:
