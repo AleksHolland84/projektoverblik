@@ -162,7 +162,7 @@ if authentication_status and username != "admin":
         add_contribution(username=username, value=1, date = datetime.now().strftime("%Y-%m-%d")) # add contribution to graph
 
     if text_area(label="Undersøgelsesspørgsmål", value=user_content.get('undersøgelsesspørgsmål'), ref=f"/content_container/usernames/{username}/content", toast="Undersøgelsesspørgsmål uploaded!"):
-        add_contribution(value=1, date = datetime.now().strftime("%Y-%m-%d")) # add contribution to graph
+        add_contribution(username=username, value=1, date = datetime.now().strftime("%Y-%m-%d")) # add contribution to graph
 
     if text_area(label="Problemformulering", value=user_content.get('problemformulering'), ref=f"/content_container/usernames/{username}/content", toast="Problemformulering uploaded!"):
         add_contribution(username=username, value=1, date = datetime.now().strftime("%Y-%m-%d")) # add contribution to graph
