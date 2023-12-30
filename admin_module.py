@@ -43,7 +43,7 @@ def add_user(name: str, users: list):
     time.sleep(2)
     return True
 
-def create_user_login(name: str, password: list):
+def create_user_login(name: str, password: list = ["password"]):
     hashed_pass = stauth.Hasher(password).generate()
     ref = db.reference(f"/credentials/usernames")
     if name.lower() in ref.get():
