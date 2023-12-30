@@ -160,13 +160,14 @@ if authentication_status and username != "admin":
     st.header("Uge 3", divider = "grey")
     if text_area(label="Gruppekontrakt", value=user_content.get('gruppekontrakt'), ref=f"/content_container/usernames/{username}/content", toast="Gruppekontrakt uploaded!"):
         add_contribution(username=username, value=1, date = datetime.now().strftime("%Y-%m-%d")) # add contribution to graph
-
+        st.rerun()
     if text_area(label="Undersøgelsesspørgsmål", value=user_content.get('undersøgelsesspørgsmål'), ref=f"/content_container/usernames/{username}/content", toast="Undersøgelsesspørgsmål uploaded!"):
         add_contribution(username=username, value=1, date = datetime.now().strftime("%Y-%m-%d")) # add contribution to graph
-
+        st.rerun()
     if text_area(label="Problemformulering", value=user_content.get('problemformulering'), ref=f"/content_container/usernames/{username}/content", toast="Problemformulering uploaded!"):
         add_contribution(username=username, value=1, date = datetime.now().strftime("%Y-%m-%d")) # add contribution to graph
-
+        st.rerun()
+        
 
     # --- SET VEJLEDNINGSTID ---
     col1, col2, col3 = st.columns(3)
