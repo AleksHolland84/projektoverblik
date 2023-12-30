@@ -42,10 +42,10 @@ def log_book(username: str, label: str, value: str, ref: str, toast: str):
 
 # --- Function to add value to the contribution graph ---
 @st.cache_resource # cache the function
-def add_contribution(username: str, value: int = 1, date_me):
+def add_contribution(username: str, value: int = 1, date):
     ref = db.reference(f"/content_container/usernames/{username}/graph/data/")
     data = ref.get()
-    value_of_contribution = data.get(date_me)
+    value_of_contribution = data.get(date)
     if value_of_contribution:
         ref.update({date: value_of_contribution + value})
     else:
