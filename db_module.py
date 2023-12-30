@@ -50,4 +50,5 @@ def add_contribution(username: str, value: int = 1, date: str = "2024-12-24"):
         ref.update({date: value_of_contribution + value})
     else:
         ref.update({date: value})
+    st.rerun()
     return True
