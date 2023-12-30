@@ -39,7 +39,7 @@ def log_book(username: str, label: str, value: str, ref: str, toast: str):
                 if value[1] != "":
                     st.write(f'Uploaded: {value[1]}')
             return value[1] # return date of upload
-    st.rerun()
+
             
 
 # --- Function to add value to the contribution graph ---
