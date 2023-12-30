@@ -5,15 +5,13 @@ import time
 from datetime import datetime
 
 # --- Generate streamlit text_area
-def text_area(username: str, label: str, value: str, ref: str, toast: str):
+def text_area(label: str, value: str, ref: str, toast: str):
     _input = st.text_area(label = label, value=value)
     if st.button(f"Upload {label}"):
         ref = db.reference(ref)
         ref.update({label.lower(): _input})
         st.toast(toast)
-        #add_contribution(username=username, value=1) # add contribution to graph
         time.sleep(2)
-        #st.rerun()
         return True
 
 # --- Function displau st.text_area. If db contains text, the text_area's
@@ -34,20 +32,19 @@ def log_book(username: str, label: str, value: str, ref: str, toast: str):
                 }})
             st.toast(toast)
             time.sleep(2)
-            add_contribution(username=username, value = 1) # add 1 point to contribution graph
-            #st.rerun()
     if value:
         if len(value) > 1:
             with col2:
                 if value[1] != "":
                     st.write(f'Uploaded: {value[1]}')
             return value[1] # return date of upload
+    return True
 
 # --- Function to add value to the contribution graph ---
-def add_contribution(username: str, value: int = 1):
+@st.cache_resource # cache the function
+def add_contribution(username: str, value: int = 1 date: datatime):
     ref = db.reference(f"/content_container/usernames/{username}/graph/data/")
     data = ref.get()
-    date = datetime.now().strftime("%Y-%m-%d")
     value_of_contribution = data.get(date)
     if value_of_contribution:
         ref.update({date: value_of_contribution + value})
