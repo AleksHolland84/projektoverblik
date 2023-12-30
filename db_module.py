@@ -11,9 +11,9 @@ def text_area(username: str, label: str, value: str, ref: str, toast: str):
         ref = db.reference(ref)
         ref.update({label.lower(): _input})
         st.toast(toast)
-        add_contribution(username=username, value=1) # add contribution to graph
+        #add_contribution(username=username, value=1) # add contribution to graph
         time.sleep(2)
-        #st.rerun()
+        st.rerun()
         return True
 
 # --- Function displau st.text_area. If db contains text, the text_area's
@@ -34,7 +34,7 @@ def log_book(username: str, label: str, value: str, ref: str, toast: str):
                 }})
             st.toast(toast)
             time.sleep(2)
-            #add_contribution(username=username, value = 1) # add 1 point to contribution graph
+            add_contribution(username=username, value = 1) # add 1 point to contribution graph
             st.rerun()
     if value:
         if len(value) > 1:
