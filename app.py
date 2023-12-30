@@ -59,7 +59,7 @@ if authentication_status and username == "admin":
     st.header('Tilføj ny gruppe')
     new_user = st.text_input('Navn:', value=None, max_chars=20)
     password_new_user = st.text_input("Password", max_chars=20)
-    st.caption('Hvis password input undlades vil password være "password"')
+    st.caption('Husk at sætte password!')
     if st.button('Tilføj gruppe'):
         if add_user(name = new_user, users= list_of_users):
             if create_user_login(new_user, [password_new_user]):
