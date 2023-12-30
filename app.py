@@ -262,7 +262,6 @@ if authentication_status and username != "admin":
         }
         nc.nivo_chart(data=contribution_graph["data"], layout=contribution_graph["layout"],key="calendar_chart")
 
-
-
+    st.stop()
 
     # --- FOTTER ---
