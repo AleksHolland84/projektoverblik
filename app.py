@@ -67,7 +67,8 @@ if authentication_status and username == "admin":
         password_new_user = st.text_input("Password", max_chars=20)
         st.caption('Husk at sætte password!')
         if st.form_submit_button('Tilføj gruppe'):
-            add_user(name = new_user, users= list_of_users, password = [password_new_user])
+            if add_user(name = new_user, users= list_of_users, password = [password_new_user]):
+                st.rerun()
 
 
     # --- SHOW USER CONTENT ---
