@@ -16,7 +16,7 @@ def add_user(name: str, users: list, password: list):
     if name in users:
         st.warning(f'{name} findes allerede')
         return None
-    create_user_login(name,[password):
+    create_user_login(name, password):
     ref = db.reference(f"/content_container/usernames")
     user_template = {
         name.lower() :{
