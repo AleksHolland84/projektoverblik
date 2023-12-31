@@ -57,10 +57,7 @@ if authentication_status and username == "admin":
     from admin_module import *
 
     app_users = get_content()
-    if app_users.get('usernames') != None:
-        list_of_users = [user for user in app_users.get('usernames')]
-    else:
-        list_of_users = list()
+    list_of_users = [user for user in app_users.get('usernames')]
     #st.write(list_of_users) # write list of users
 
     # --- ADD NEW USER ---
