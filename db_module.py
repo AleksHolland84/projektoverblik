@@ -6,25 +6,27 @@ from datetime import datetime
 
 # --- Generate streamlit text_area
 def text_area(label: str, value: str, ref: str, toast: str):
-    _input = st.text_area(label = label, value=value)
-    if st.button(f"Upload {label}"):
-        ref = db.reference(ref)
-        ref.update({label.lower(): _input})
-        st.toast(toast)
-        time.sleep(2)
-        return True
+    with st.form(key=label, border=0):
+        _input = st.text_area(label = label, value=value)
+        if st.form_submit_button(f"Upload {label}"):
+            ref = db.reference(ref)
+            ref.update({label.lower(): _input})
+            st.toast(toast)
+            time.sleep(2)
+            return True
 
 # --- Function displau st.text_area. If db contains text, the text_area's
 # --- label will contain the db content. Also, it db contains text,
 # --- the date for uploading text is displayed ---
 def log_book(username: str, label: str, value: str, ref: str, toast: str):
+    form = st.form(key=label, border=0)
     if value != None:
-        _input = st.text_area(label = label, value=value[0])
+        _input = form.text_area(label = label, value=value[0])
     else:
-        _input = st.text_area(label = label, value=value)
+        _input = form.text_area(label = label, value=value)
     col1, col2 = st.columns(2)
     with col1:
-        if st.button(f"Upload {label}"):
+        if form.form_submit_button(f"Upload {label}"):
             ref = db.reference(ref)
             ref.update({label.lower():{
                 0:_input,
