@@ -9,13 +9,14 @@ import pandas as pd
 
 
 # --- ADD USER TO DB ---
-def add_user(name: str, users: list):
+def add_user(name: str, users: list, password: str):
     if "admin" in name:
         st.error('Navne der indeholder "admin", er ikke tilladt!')
         return None
     if name in users:
         st.warning(f'{name} findes allerede')
         return None
+    create_user_login(name, [password]):
     ref = db.reference(f"/content_container/usernames")
     user_template = {
         name.lower() :{
