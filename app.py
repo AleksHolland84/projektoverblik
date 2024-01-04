@@ -110,12 +110,25 @@ if authentication_status and username != "admin":
     st.sidebar.title(f"Velkommen {name}")
 
     with st.sidebar:
-
+        #--- DOWNLOAD GRUPPEKONTRAKT
+        with open('Projektplan.pdf', 'rb') as projektplan:
+            st.download_button(label='Download Projetkplan',
+                               data=projektplan,
+                               file_name='Gruppekontrakt.pdf',
+                               mime='application/octet-stream')
+        #--- DOWNLOAD Projektplan ---
         with open('Projektplan.pdf', 'rb') as projektplan:
             st.download_button(label='Download Projetkplan',
                                data=projektplan,
                                file_name='Projektplan.pdf',
                                mime='application/octet-stream')
+        
+        # --- CREATE BUFFER AND DOWNLOAD BUTTON ---
+        buffer = BytesIO()
+        json_user_data = json.dumps(db.reference(f"/content_container/usernames/{username}").get()) # serialize dumped db content
+        buffer.write(json_user_data.encode()) # write encoded json string to buffer
+        st.download_button(f'Download data', buffer.getvalue(), file_name=f'{username}_projektoverblik_{current_date}.json')
+        
 
 
     # --- DISPLAY CONTENT IN APP---
@@ -211,12 +224,7 @@ if authentication_status and username != "admin":
         if date:
             pass
             #print(date)
-
-    # --- CREATE BUFFER AND DOWNLOAD BUTTON ---
-    buffer = BytesIO()
-    json_user_data = json.dumps(db.reference(f"/content_container/usernames/{username}").get()) # serialize dumped db content
-    buffer.write(json_user_data.encode()) # write encoded json string to buffer
-    st.download_button(f'Download data', buffer.getvalue(), file_name=f'{username}_projektoverblik_{current_date}.json')
+    
 
     # --- CONTRIBUTION GRAPH DATA --
     data = db.reference(f"/content_container/usernames/{username}/graph/data").get()
@@ -243,8 +251,8 @@ if authentication_status and username != "admin":
                 "type": "calendar",
                 "height": 300,
                 #"width": 700,
-                "from": "2023-01-15",
-                "to": "2024-01-26",
+                "from": "2024-01-01",
+                "to": "2024-12-31",
                 "emptyColor": BoxColor,
                 "colors": ["#bfe8bc", "#8de887", "#0fc402", "#084704"],
                 "margin": {"top": 20, "right": 20, "bottom": 20, "left": 20},
