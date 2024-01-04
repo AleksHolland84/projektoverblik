@@ -112,7 +112,7 @@ if authentication_status and username != "admin":
     with st.sidebar:
         #--- DOWNLOAD GRUPPEKONTRAKT
         with open('Gruppekontrakt.pdf', 'rb') as projektplan:
-            st.download_button(label='Download Projetkplan',
+            st.download_button(label='Download Gruppekontrakt',
                                data=projektplan,
                                file_name='Gruppekontrakt.pdf',
                                mime='application/octet-stream')
