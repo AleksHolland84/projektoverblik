@@ -216,7 +216,7 @@ if authentication_status and username != "admin":
 
     st.header("Uge 4", divider = "grey")
     # --- GENERATE TEXT AREA FOR EACH DAY IN WEEK 4 ---
-    week_day_list = ['mandag', 'tirdag', 'onsdag', 'torsdag', 'fredag']
+    week_day_list = ['mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag']
     for day in week_day_list:
         st.subheader(day.capitalize())
         logbog = logbook.get('logbog')
