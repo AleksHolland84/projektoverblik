@@ -51,10 +51,41 @@ if authentication_status == False:
 if authentication_status == None:
     st.warning("Please enter username and password")
 
-### --- TEACHER ROLE CONTENT ----
-### --- TEACHER ROLE CONTENT ----
-### --- TEACHER ROLE CONTENT ----
-if authentication_status and db.reference(f"/credentials/usernames/{username}/role").get() == "lærer":
+if authentication_status and db.reference(f"/credentials/usernames/{username}/role").get() == "admin":
+    # --- ADMIN ACCESS ---
+    # --- ADMIN ACCESS ---
+    # --- ADMIN ACCESS ---
+    authenticator.logout("Logout", "sidebar")
+    st.sidebar.title(f"Velkommen {name}")
+    from admin_module import *
+
+    app_users = get_content()
+    if app_users.get('usernames') != None:
+        list_of_users = [user for user in app_users.get('usernames')]
+    else:
+        list_of_users = list()
+
+
+    # --- ADD NEW TEACHER---
+    st.header('Tilføj ny lærer')
+    with st.form(key="admin_add_user"):
+        try:
+            list_of_teachers = get_teachers()
+            new_user = st.text_input('Navn:', value=None, max_chars=20)
+            password_new_user = st.text_input("Password", max_chars=20)
+            cls_list = st.multiselect('Klasser:', ["7a", "7b", "8x", "8y", "9x", "9y"], )
+        except TypeError as error:
+            st.error(error)
+        st.caption('Husk at sætte password!')
+        if st.form_submit_button('Tilføj lærer'):
+            if add_teacher(name = new_user, users= list_of_teachers, password = [password_new_user], cls_list = cls_list):
+                st.rerun()
+
+
+if authentication_status and db.reference(f"/credentials/usernames/{username}/role").get() == "lærer":       
+    ### --- TEACHER ROLE CONTENT ----
+    ### --- TEACHER ROLE CONTENT ----
+    ### --- TEACHER ROLE CONTENT ----
     authenticator.logout("Logout", "sidebar")
     st.sidebar.title(f"Velkommen {name}")
     from admin_module import *
