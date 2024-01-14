@@ -39,8 +39,7 @@ if authentication_status and username != "admin":
 
 
     # --- TITLE ---
-    st.title("User settings")
-
+    st.title("User settings for " + st.session_state["username"])
 
     if st.session_state["authentication_status"]:
         try:
