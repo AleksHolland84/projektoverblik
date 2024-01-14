@@ -9,57 +9,60 @@ import pandas as pd
 
 
 # --- ADD USER TO DB ---
-def add_user(name: str, users: list, password: list):
+def add_user(name: str, users: list, password: list, cls: str):
     if "admin" in name:
         st.error('Navne der indeholder "admin", er ikke tilladt!')
-        return None
+        return False
     if name in users:
         st.warning(f'{name} findes allerede')
-        return None
-    create_user_login(name, password)
-    ref = db.reference(f"/content_container/usernames")
-    user_template = {
-        name.lower() :{
-            "content":{
-                "gruppekontrakt" :"",
-                "problemformulering": "",
-                "underemne": "Fremtidens skole",
-                "undersøgelsesspørgsmål":""
-                },
-            "logbog": {
-                "logbog for mandag": [
-                    "",
-                    ]
-                },
-            "graph" : {
-                "data" : {
-                    f'{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}': 0,
+        return False
+    if create_user_login(name, password, cls):
+        ref = db.reference(f"/content_container/usernames")
+        user_template = {
+            name.lower() :{
+                "content":{
+                    "gruppekontrakt" :"",
+                    "problemformulering": "",
+                    "underemne": "Fremtidens skole",
+                    "undersøgelsesspørgsmål":""
+                    },
+                "logbog": {
+                    "logbog for mandag": [
+                        "",
+                        ]
+                    },
+                "graph" : {
+                    "data" : {
+                        f'{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}': 0,
+                        }
                     }
                 }
+
             }
+        ref.update(user_template)
+        st.toast(f'{name.lower()} added')
+        time.sleep(2)
+        return True
 
-        }
-    ref.update(user_template)
-    st.toast(f'{name.lower()} added')
-    time.sleep(2)
-    return True
-
-def create_user_login(name: str, password: list):
+def create_user_login(name: str, password: list, cls: str):
     hashed_pass = stauth.Hasher(password).generate()
     ref = db.reference(f"/credentials/usernames")
     if name.lower() in ref.get():
         print("User exists")
-        return None
+        return False
     else:
         print("creating new user in db")
         login_template = {
             name.lower() : {
                 "name": name.lower(),
-                "password": hashed_pass[0]
+                "password": hashed_pass[0],
+                "role": "elev",
+                "class": cls,
                 }
             }
         ref.update(login_template)
         return True
+        
 
 # --- ADD TEACHER TO DB ---
 def add_teacher(name: str, users: list, password: list, cls_list: list):
