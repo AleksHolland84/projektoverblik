@@ -50,8 +50,11 @@ if authentication_status == False:
     st.error("Username/password is incorrect")
 if authentication_status == None:
     st.warning("Please enter username and password")
-if authentication_status and username == "admin":
-    # --- ADMIN ACCESS ---
+
+### --- TEACHER ROLE CONTENT ----
+### --- TEACHER ROLE CONTENT ----
+### --- TEACHER ROLE CONTENT ----
+if authentication_status and db.reference(f"/credentials/usernames/{username}/role").get() == "lærer":
     authenticator.logout("Logout", "sidebar")
     st.sidebar.title(f"Velkommen {name}")
     from admin_module import *
@@ -62,19 +65,27 @@ if authentication_status and username == "admin":
 
     # --- ADD NEW USER ---
     st.header('Tilføj ny gruppe')
-    with st.form(key="admin_add_user"):
-        new_user = st.text_input('Navn:', value=None, max_chars=20)
-        password_new_user = st.text_input("Password", max_chars=20)
+    with st.form(key="teacher_add_user"):
+        try:
+            cls_list = db.reference(f"/teachers/usernames/{username}/classes/").get()
+            new_user = st.text_input('Navn:', value=None, max_chars=20)
+            password_new_user = st.text_input("Password", max_chars=20)
+            cls = st.selectbox('Klasse', cls_list)
+        except TypeError as error:
+            st.error(error)
+
         st.caption('Husk at sætte password!')
         if st.form_submit_button('Tilføj gruppe'):
-            if add_user(name = new_user, users= list_of_users, password = [password_new_user]):
+            if add_user(name = new_user, users= list_of_users, password = [password_new_user], cls = cls):
                 st.rerun()
 
 
     # --- SHOW USER CONTENT ---
     st.header('Vis gruppens afleverede indhold')
+    cls = st.selectbox('Klasse', cls_list)
+    list_of_users_in_cls = get_class(cls = cls)
     selected_user = st.selectbox("Vis indhold",
-              list_of_users)
+              list_of_users_in_cls)
     user_data = app_users.get('usernames').get(selected_user)
     st.subheader(selected_user)
 
@@ -84,7 +95,6 @@ if authentication_status and username == "admin":
     st.json(json_data) # display json data in app
     buffer.write(json_data.encode()) # write encoded json string to buffer
     st.download_button(f'Download data', buffer.getvalue(), file_name=f'{selected_user}_projektoverblik_{current_date}.json')
-
 
     # --- REMOVE USER---
     st.subheader('Delete grupper/bruger')
@@ -99,11 +109,11 @@ if authentication_status and username == "admin":
                 st.toast("Check 'Delete gruppe' for at delete valgte gruppe")
                 time.sleep(2)
 
-    options = st.multiselect('Delete grupper', list_of_users)
+    options = st.multiselect('Delete grupper', list_of_users_in_cls)
     if st.button('Delete grupper!'):
         remove_multiple_users(names = options)
-
-if authentication_status and username != "admin":
+        
+if authentication_status and db.reference(f"/credentials/usernames/{username}/role").get() == "elev":
     # --- USER ACCESS
     # --- SIDEBAR ---
     authenticator.logout("Logout", "sidebar")
