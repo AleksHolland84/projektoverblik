@@ -185,13 +185,13 @@ if authentication_status and db.reference(f"/credentials/usernames/{username}/ro
     # --- DISPLAY INTRO AND WARNING ---
 
     col1, col2 = st.columns([4, 1]) # this will just call methods directly in the returned objects
-    with col1:
+    with col2:
         # --- TITLE ---
         st.title("Projekt overblik")
 
     # Inside the second column, add the image
-    with col2:
-        st.image("images/brainstorm.png", caption="Brainstorm Image", use_column_width=True)
+    with col1:
+        st.image("images/brainstorm.png", use_column_width=True)
 
     st.markdown('''
                 Et værktøj til at skabe overblik og hjælpe med at opfylde de forskellige krav
