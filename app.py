@@ -179,20 +179,27 @@ if authentication_status and db.reference(f"/credentials/usernames/{username}/ro
     emner = db.reference("/content_container/emne/Fremtidens samfund").get() # load underemner
     vejledninger = db.reference(f"/content_container/usernames/{username}/vejledning/").get()
 
-
+    
 
 
     # --- TITLE ---
     st.title("Projekt overblik")
 
     # --- DISPLAY INTRO AND WARNING ---
-    st.markdown('''
+
+    col1, col2 = st.columns([3, 1]) # this will just call methods directly in the returned objects
+    with col1:
+            st.markdown('''
                 Et værktøj til at skabe overblik og hjælpe med at opfylde de forskellige krav
                 under projekt ugen i folkeskolen. Når I uploader, gemmes tekstfeltets data i en database.
 
                 :red[Upload ikke personfølsom data!]
 
-                ''')
+                ''')   
+    # Inside the second column, add the image
+    with col2:
+        st.image("images/brainstorm.png", caption="Brainstorm Image", use_column_width=True)
+
 
     st.header("Uge 2", divider = "grey")
     # --- UNDEREMNER ---
