@@ -184,7 +184,7 @@ if authentication_status and db.reference(f"/credentials/usernames/{username}/ro
 
     # --- DISPLAY INTRO AND WARNING ---
 
-    col1, col2 = st.columns([4, 1]) # this will just call methods directly in the returned objects
+    col1, col2 = st.columns([1, 4]) # this will just call methods directly in the returned objects
     with col2:
         # --- TITLE ---
         st.title("Projekt overblik")
