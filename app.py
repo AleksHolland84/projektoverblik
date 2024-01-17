@@ -185,21 +185,21 @@ if authentication_status and db.reference(f"/credentials/usernames/{username}/ro
     # --- DISPLAY INTRO AND WARNING ---
 
     col1, col2 = st.columns([1, 4]) # this will just call methods directly in the returned objects
-    with col2:
-        # --- TITLE ---
-        st.title("Projekt overblik")
 
     # Inside the second column, add the image
     with col1:
         st.image("images/brainstorm.png", use_column_width=True)
-
-    st.markdown('''
+ 
+    with col2:
+        # --- TITLE ---
+        st.title("Projekt overblik")
+        st.markdown('''
                 Et værktøj til at skabe overblik og hjælpe med at opfylde de forskellige krav
                 under projekt ugen i folkeskolen. Når I uploader, gemmes tekstfeltets data i en database.
 
                 :red[Upload ikke personfølsom data!]
 
-                ''')   
+                ''')  
     
     st.header("Uge 2", divider = "grey")
     # --- UNDEREMNER ---
