@@ -73,7 +73,7 @@ if authentication_status and db.reference(f"/credentials/usernames/{username}/ro
             list_of_teachers = get_teachers()
             new_user = st.text_input('Navn:', value=None, max_chars=20)
             password_new_user = st.text_input("Password", max_chars=20)
-            cls_list = st.multiselect('Klasser:', ["7a", "7b", "8x", "8y", "9x", "9y"], )
+            cls_list = st.multiselect('Klasser:', ["7a", "7b", "8a", "8b", "9x", "9y"], )
         except TypeError as error:
             st.error(error)
         st.caption('Husk at sætte password!')
