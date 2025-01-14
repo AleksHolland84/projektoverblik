@@ -34,7 +34,7 @@ def log_book(username: str, label: str, value: str, ref: str, toast: str):
                 }})
             add_contribution(username=username, value=1, date = datetime.now().strftime("%Y-%m-%d")) # add contribution to graph
             st.toast(toast)
-            st.rerun()
+            #st.rerun() # Comment out rerun to see if it is nessesary. I think it makes the app slower
             time.sleep(2)
     if value:
         if len(value) > 1:
