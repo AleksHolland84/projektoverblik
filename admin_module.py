@@ -84,6 +84,18 @@ def add_teacher(name: str, users: list, password: list, cls_list: list):
         st.toast(f'{name.lower()} added')
         time.sleep(2)
         return True
+    
+def edit_teacher(name: str, classes: list):
+    try:
+        ref = db.reference(f"/teachers/usernames/{name}/")
+        template = {"classes": classes}
+        ref.update(template)
+        for cls in classes:
+            st.toast(f'Classes: {cls} added to {name.lower()}')
+    except  Exception as e:
+        print(e)
+        print("Error at edit_teacher")
+
 
 def create_teacher_login(name: str, password: list, cls_list: list):
     hashed_pass = stauth.Hasher(password).generate()
@@ -137,34 +149,3 @@ def get_teachers():
     teacher_creds = db.reference(f"/teachers").get() # load user content
     cls_list = [teacher for teacher in teacher_creds.get("usernames")]
     return cls_list
-
-
-# --- CONTENT BELOW DIDN'T WORK. CAUSED AN ERROR IN STREAMLIT.
-# SETTING THE KEY VALUE MAKES THE CODE NOT LOAD... TO BE TESTED LATER
-#for user, content in user_content.get("usernames").items():
-    #vejledning = content.get("vejledning")
-    #st.header(user)
-    #st.text(f"Vejledningstid: {vejledning}")
-    #st.write(user_content["usernames"])
-
-
-
-#users = user_content.get('usernames')
-#for user in users:
-
-    #st.header(user)
-    #problemformulering_vejledning = users.get(user).get("vejledning")
-
-    #vejledninger = users.get(user).get("vejledning")
-    #if vejledninger != None:
-        #vejledning_1 = datetime.strptime(vejledninger[0], '%Y-%m-%d %H:%M:%S')
-        #st.caption(f'Vejledningstid: {vejledning_1}')
-
-    #st.write(users.get(user))
-    #users.get(user).get("content")
-    #st.subheader("Underemne")
-    #st.write(users.get(user).get("content").get("underemne"))
-    #st.subheader("Gruppekontrakt")
-    #st.write(users.get(user).get("content").get("gruppekontrakt"))
-    #st.subheader("Problemformulering")
-    #st.write(users.get(user).get("content").get("problemformulering"))
